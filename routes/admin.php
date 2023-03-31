@@ -17,3 +17,7 @@ Route::get('admin',function()
 {
         return view('backend.index');
 });
+Route::get('packages',function()
+{
+        return view('backend.packages.index');
+})->name('package.index');
