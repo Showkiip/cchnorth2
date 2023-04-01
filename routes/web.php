@@ -24,6 +24,7 @@ Route::name('frontend.')->group(function () {
     Route::get('/packages', function () {
         return view('frontend.packages.packages');
     })->name('packages');
+
     Route::get('/package-details', function () {
         return view('frontend.packages.package-details');
     })->name('package-details');
