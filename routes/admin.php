@@ -13,21 +13,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('admin.')->group(function () {
-
-Route::get('admin',function()
-{
-        return view('backend.index');
-});
-Route::get('package',function()
-{
-        return view('backend.packages.index');
-})->name('package.index');
-
-});
 
 
-Route::group(['middleware' => ['auth']], function () {
+
+// Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin', function () {
         return view('backend.index');
@@ -48,6 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('view-single-blog/{id}', [BlogController::class, "viewSingleBlog"])->name('view.single.blog');
     Route::post('update-single-blog/{id}', [BlogController::class, "updateSingleBlog"])->name('update.single.blog');
     Route::resource('userRatings', UserRatingController::class);
-    // Route::get()
 
-});
+
+// });
