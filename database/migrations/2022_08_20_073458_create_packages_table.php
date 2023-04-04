@@ -20,11 +20,14 @@ class CreatePackagesTable extends Migration
             $table->string('package_name')->nullable();
             $table->string('package_rating')->nullable();
             $table->string('person')->nullable();
+            $table->string('adults')->nullable();
+            $table->string('childs')->nullable();
             $table->string('discount_price')->nullable();
             $table->string('sell_price')->nullable();
             $table->string('package_duration')->nullable();
             $table->text('package_description')->nullable();
             $table->string('package_image')->nullable();
+            $table->string('package_file')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

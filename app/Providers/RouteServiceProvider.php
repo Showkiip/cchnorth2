@@ -19,24 +19,88 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
 
+    protected $namespace = 'App\Http\Controllers';
+
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
     {
-        $this->configureRateLimiting();
+        parent::boot();
 
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+        // $this->configureRateLimiting();
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+        // $this->routes(function () {
+        //     Route::middleware('api')
+        //         ->prefix('api')
+        //         ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/admin.php'));
-        });
+        //     Route::middleware('web')
+        //         ->group(base_path('routes/web.php'));
+
+            // Route::middleware('admin')
+            //     ->group(base_path('routes/admin.php'));
+        // });
+    }
+
+    /**
+     * Define the routes for the application.
+     *
+     * @return void
+     */
+    public function map()
+    {
+
+
+        $this->mapApiRoutes();
+
+
+        $this->mapWebRoutes();
+
+
+        $this->mapAdminRoutes();
+    }
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
     }
 
     /**

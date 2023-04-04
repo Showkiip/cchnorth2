@@ -1,6 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PackageCategoryController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackageItineraryController;
+use App\Http\Controllers\PackageTypeController;
+use App\Http\Controllers\RecentTripController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserRatingController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -21,12 +30,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('/admin', function () {
         return view('backend.index');
     })->name('admin');
+    Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('status/{slug}/{id}', [HomeController::class, "changeStatus"]);
     Route::resource('sliders', SliderController::class);
     Route::resource('packagetypes', PackageTypeController::class);
     Route::resource('packageCategory', PackageCategoryController::class);
-    Route::resource('packages', PackageController::class);
+    Route::resource('package', PackageController::class);
     Route::resource('packageItinerary', PackageItineraryController::class);
     Route::resource('recentTrips', RecentTripController::class);
     Route::get('add-package-itinerary/{id}', [PackageController::class, "addIntinerary"])->name('add.package.itinerary');
@@ -39,4 +49,4 @@ use Illuminate\Support\Facades\Route;
     Route::resource('userRatings', UserRatingController::class);
 
 
-// });
+});
